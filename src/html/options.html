@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GitHub Changelog Viewer Options</title>
+    <style type="text/css">
+      body {
+        font-size: 15px;
+      }
+
+      .btn {
+        /* Reset default styling from webkit */
+        background-image: none !important;
+        text-shadow: none !important;
+        box-shadow: none !important;
+
+        display: inline-block;
+        position: relative;
+        min-width: 100%;
+        margin: 0;
+        padding: 0 12px;
+        border: none;
+        border-radius: 6px;
+        vertical-align: middle;
+        overflow: hidden;
+        outline: none;
+        background-color: #047ef0;
+        transition: background-color 200ms cubic-bezier(0.25, 0.1, 0.25, 1),
+                    color 200ms cubic-bezier(0.25, 0.1, 0.25, 1);
+
+        color: #fff !important;
+        font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        text-transform: uppercase;
+        cursor: pointer;
+        text-decoration: none;
+        text-align: center;
+        line-height: 36px;
+      }
+      .btn:hover {
+        /* Reset default styling from webkit */
+        background-image: none !important;
+        text-shadow: none !important;
+        box-shadow: none !important;
+
+        background-color: #0363bd;
+        color: #fff !important;
+      }
+      .btn.disabled {
+        background-color: #ccc;
+        pointer-events: none;
+      }
+
+      .background--default {
+        border-radius: 6px;
+        background: #eeeeee;
+      }
+
+      .p10 {
+        padding: 10px;
+      }
+
+      .pb10 {
+        padding-bottom: 10px;
+      }
+
+      .mt20 {
+        margin-top: 20px;
+      }
+
+      .mt10 {
+        margin-top: 10px;
+      }
+
+      .mb20 {
+        margin-bottom: 20px;
+      }
+
+      .vertical-center {
+        vertical-align: middle;
+      }
+
+      .d-inline-block {
+        display: inline-block;
+      }
+
+      .d-none {
+        display: none;
+      }
+
+      .float--right {
+        float: right;
+      }
+
+      .msg--success {
+        color: #1AB73A;
+      }
+
+      .msg--warning {
+        color: #ff7f00;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="d-inline-block float--right d-none" id="status">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 193 202"
+        width="20"
+        height="20"
+        class="vertical-center"
+      >
+        <path fill="#1AB73A"
+          d="M1 135c2-8 18-17 29-14 5 1 13 31 18 32 4-1 15-20 33-46 17-27 42-61 63-86l3-4c3-5 15-12 23-14s20-3 22 0c2 4-14 23-20 29-18 22-84 110-94 130-4 4-15 23-26 36-12 6-26 2-30 0-8-10-21-47-21-63z" />
+      </svg>
+      <span id="status--text" class="msg--success vertical-center"></span>
+    </div>
+
+    <h3 class="d-inline-block">Options</h3>
+
+    <div class="background--default mt10 p10">
+      <div class="pb10">Clear Repo Cache</div>
+      <button class="btn mt10" id="clear-cache-btn">Clear Cache</button>
+    </div>
+
+    <div class="background--default mt10 p10">
+      <div class="pb10">Enter GitHub Access Token</div>
+      <input
+        type="text"
+        name=""
+        placeholder="GitHub Access Token"
+        id="gcviewer-token"
+        class="mt10"
+        style="width: 98%;"
+      />
+
+      <div class="mt10 d-none" id="validation-block">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 32 32"
+          width="20"
+          vertical="20"
+          class="vertical-center"
+        >
+          <path fill="none" d="M-1-1h582v402H-1z" />
+          <g>
+            <path fill="#ff7f00"
+              d="M14.42 6.15c.87-1.4 2.29-1.4 3.16 0L28.36 23.6c1.16 1.88.32 3.4-1.89 3.4H5.53c-2.2 0-3.06-1.52-1.9-3.4l10.8-17.45zM16 20a1 1 0 001-1v-6a1 1 0 00-1-1 1 1 0 00-1 1v6a1 1 0 001 1zm0 4a1 1 0 100-2 1 1 0 000 2zm0 0" />
+          </g>
+        </svg>
+        <span id="validation-warning" class="msg--warning vertical-center mt10"></span>
+      </div>
+
+      <button class="btn mt20 mb20" id="save-btn">Save</button>
+      <div>
+        <iframe src="https://ghbtns.com/github-btn.html?user=dburdan&repo=github-changelog-viewer&type=star&count=true&size=large"
+          frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="options.js"></script>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+{
+  "name": "GitHub Changelog Viewer",
+  "short_name": "GitHub Changelog Viewer",
+  "version": "0.1",
+  "manifest_version": 2,
+  "description": "Quickly view changelogs in a Github repo.",
+  "homepage_url": "https://github.com/dburdan/github-changelog-viewer",
+  "author": "Dacri Burdan",
+  "permissions": [
+    "*://*.github.com/*",
+    "storage",
+    "webRequest",
+    "webNavigation"
+  ],
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png",
+    "256": "images/icon-256.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon-48.png",
+    "default_title": "GitHub Changelog Viewer"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.github.com/*"
+      ],
+      "js": [
+        "inject.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  }
+}

@@ -1,0 +1,10 @@
+*zip*
+dist/
+builds/
+node_modules/
+*.log
+.idea
+.DS_Store
+coverage
+*.code-workspace
+*.ai

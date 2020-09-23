@@ -1,0 +1,53 @@
+{
+  "name": "github-changelog-viewer",
+  "version": "0.0.1",
+  "description": "Quickly view changelogs in a Github repo.",
+  "main": "src/inject.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dburdan/github-changelog-viewer.git"
+  },
+  "author": "Dacri Burdan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dburdan/github-changelog-viewer/issues"
+  },
+  "homepage": "https://github.com/dburdan/github-changelog-viewer#readme",
+  "scripts": {
+    "dev": "webpack --watch --mode=development",
+    "prod": "webpack --mode=production",
+    "lint": "eslint '**/*.ts'"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "yarn lint"
+    }
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-typescript"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-typescript": "^7.10.4",
+    "@types/chrome": "^0.0.123",
+    "@types/node": "^14.11.2",
+    "@types/webpack": "^4.41.22",
+    "@typescript-eslint/eslint-plugin": "^4.2.0",
+    "@typescript-eslint/parser": "^4.2.0",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^6.1.1",
+    "eslint": "^7.9.0",
+    "husky": "^4.3.0",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12",
+    "webpack-zip-files-plugin": "^1.0.0"
+  },
+  "dependencies": {}
+}
