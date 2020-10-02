@@ -40,7 +40,7 @@ const getDropdownHtml = (list: [string, string][]) => {
         ${sortedList.map(([name, link]) => {
           // <li class="d-block d-md-none dropdown-divider" role="none"></li>
           return `
-            <li class="${constants.DOM.CUSTOM_DROPDOWN_ITEM_CLASS}">
+            <li class="${constants.DOM.CUSTOM_DROPDOWN_ITEM_CLASS}" title="${name}">
               <a class="dropdown-item" href="${link}">
                 ${name}
               </a>
