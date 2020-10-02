@@ -108,12 +108,21 @@ const appendChangelogNav = (data: SearchResponse) => {
 
   injectCommonCss();
 
+  // Get current branch from dropdown. This differs if branch isn't on master.
+  const branchSelectMenu = document.getElementById('branch-select-menu');
+  const branchSelectMenuSummary = branchSelectMenu?.querySelector('summary');
+  let currentBranch = branchSelectMenuSummary?.title;
+  if (currentBranch.includes(' ')) { // If on master, a space will exist in the `title` attribute.
+    currentBranch = branchSelectMenuSummary?.textContent?.trim();
+  }
+  if (!currentBranch) currentBranch = 'master';
+
   // Process search response
   const linkSets: [string, string][] = data?.items?.map((result) => {
     const name = result.path
       .replace('packages/', '')
       .replace('/CHANGELOG.md', '');
-    return [name, result.html_url];
+    return [name, `https://github.com/${result.repository.full_name}/tree/${currentBranch}/${result.path}`];
   });
 
   // Get nav divs
