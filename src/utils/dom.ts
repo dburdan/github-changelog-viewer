@@ -77,8 +77,12 @@ const injectCommonCss = () => {
     #${constants.DOM.CHANGELOG_DROPDOWN_ID} {
       display: none;
     }
+    #${constants.DOM.CHANGELOG_DROPDOWN_ID} ul {
+      max-height: calc(100vh - 300px);
+      overflow: auto;
+    }
     #${constants.DOM.CHANGELOG_DROPDOWN_ID} .dropdown-menu {
-      width: 200px;
+      width: 220px;
     }
   `;
   document.getElementsByTagName('head')[0].appendChild(styleElem);
