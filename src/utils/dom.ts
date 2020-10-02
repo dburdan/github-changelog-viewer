@@ -29,22 +29,29 @@ const getNavItemHtml = (href: string, numChangelogs: number) => {
   `
 };
 
-const getDropdownHtml = (list: [string, string][]) => `
-  <div id="${constants.DOM.CHANGELOG_DROPDOWN_ID}">
-    <ul class="dropdown-menu dropdown-menu-sw">
-      ${list.map(([name, link]) => {
-        // <li class="d-block d-md-none dropdown-divider" role="none"></li>
-        return `
-          <li class="${constants.DOM.CUSTOM_DROPDOWN_ITEM_CLASS}">
-            <a class="dropdown-item" href="${link}">
-              ${name}
-            </a>
-          </li>
-        `;
-      }).join('')}
-    </ul>
-  </div>
-`;
+const getDropdownHtml = (list: [string, string][]) => {
+  const sortedList = list.sort((a, b) => {
+    if (a[0] < b[0]) return -1;
+    if (a[0] > b[0]) return 1;
+    return 0;
+  });
+  return `
+    <div id="${constants.DOM.CHANGELOG_DROPDOWN_ID}">
+      <ul class="dropdown-menu dropdown-menu-sw">
+        ${sortedList.map(([name, link]) => {
+          // <li class="d-block d-md-none dropdown-divider" role="none"></li>
+          return `
+            <li class="${constants.DOM.CUSTOM_DROPDOWN_ITEM_CLASS}">
+              <a class="dropdown-item" href="${link}">
+                ${name}
+              </a>
+            </li>
+          `;
+        }).join('')}
+      </ul>
+    </div>
+  `;
+}
 
 
 /**
