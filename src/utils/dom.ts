@@ -122,7 +122,7 @@ const appendChangelogNav = (data: SearchResponse) => {
     const name = result.path
       .replace('packages/', '')
       .replace('/CHANGELOG.md', '');
-    return [name, `https://github.com/${result.repository.full_name}/tree/${currentBranch}/${result.path}`];
+    return [name, `${result.repository.html_url}/tree/${currentBranch}/${result.path}`];
   });
 
   // Get nav divs
