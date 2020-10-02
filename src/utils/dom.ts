@@ -14,7 +14,6 @@ const getNavItemHtml = (href: string, numChangelogs: number) => {
       id="${constants.DOM.CHANGELOG_NAV_DIV_ID}"
       href="${href}"
       class="ml-3 link-gray-dark no-underline position-relative"
-      ${numChangelogs === 0 ? 'skiptoreleases="true"' : ''}
     >
       <svg text="gray" height="16" class="octicon octicon-tag text-gray" viewBox="0 0 16 16" version="1.1" width="16" aria-hidden="true">
         <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
@@ -129,26 +128,29 @@ const appendChangelogNav = (data: SearchResponse) => {
   const names = api.getRepoNamesFromUrl();
   const navHref = (linkSets.length === 0)
     ? `https://github.com/${names.user}/${names.repo}/releases`
-    : 'javascript:;'; // ! Shows error in console but doesn't leave history entry
+      : (linkSets.length === 1)
+        ? linkSets[0][1] // Link directly to single changelog
+        : 'javascript:;'; // ! Shows error in console but doesn't leave history entry
+
   navItemDiv.insertAdjacentHTML('beforeend', getNavItemHtml(navHref, linkSets.length));
   const changelogDiv = document.getElementById(constants.DOM.CHANGELOG_NAV_DIV_ID);
   changelogDiv.insertAdjacentHTML('beforeend', getDropdownHtml(linkSets))
 
   // Add click event listener to open dropdown and outside listener to close
-  document.addEventListener('click', (e) => {
-    const changelogDropdownDiv = document.getElementById(constants.DOM.CHANGELOG_DROPDOWN_ID);
-    const navDiv = document.getElementById(constants.DOM.CHANGELOG_NAV_DIV_ID);
+  if (linkSets.length > 1) {
+    document.addEventListener('click', (e) => {
+      const changelogDropdownDiv = document.getElementById(constants.DOM.CHANGELOG_DROPDOWN_ID);
+      const navDiv = document.getElementById(constants.DOM.CHANGELOG_NAV_DIV_ID);
 
-    if (navDiv?.contains?.(e.target as Node)) {
-      if (!navDiv.hasAttribute('skiptoreleases')) {
+      if (navDiv?.contains?.(e.target as Node)) {
         changelogDropdownDiv.style.display === 'block'
           ? changelogDropdownDiv.style.display = 'none'
           : changelogDropdownDiv.style.display = 'block';
+      } else {
+        changelogDropdownDiv.style.display = 'none';
       }
-    } else {
-      changelogDropdownDiv.style.display = 'none';
-    }
-  });
+    });
+  }
 };
 
 export default {
