@@ -86,7 +86,7 @@ const getChangelogs = (callback: (data: SearchResponse | null) => void): void =>
 
   // Query API then cache the results
   window
-    .fetch(GITHUB_SEARCH_API_BASE_URL + 'filename:CHANGELOG.md+repo:' + userRepo, {
+    .fetch(GITHUB_SEARCH_API_BASE_URL + 'filename:CHANGELOG.md+repo:' + userRepo + '&per_page=100', {
       headers: headers,
     })
     .then(checkStatus)
