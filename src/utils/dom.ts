@@ -38,6 +38,7 @@ const getDropdownHtml = (list: [string, string][]) => {
   return `
     <div id="${constants.DOM.CHANGELOG_DROPDOWN_ID}">
       <ul class="dropdown-menu dropdown-menu-sw">
+        ${list.length > 50 ? '<small class="max-results-alert">Limited to 100 results</small>' : ''}
         ${sortedList.map(([name, link]) => {
           return `
             <li
@@ -87,6 +88,13 @@ const injectCommonCss = () => {
     }
     #${constants.DOM.CHANGELOG_DROPDOWN_ID} .dropdown-menu {
       width: 220px;
+    }
+
+    #${constants.DOM.CHANGELOG_DROPDOWN_ID} .dropdown-menu .max-results-alert {
+      padding-left: 16px;
+      line-height: 1.5;
+      color: #ccc;
+      cursor: default;
     }
 
     /* Add bottom border to top-level changelog row */
