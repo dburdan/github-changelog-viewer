@@ -29,22 +29,26 @@ const getNavItemHtml = (href: string, numChangelogs: number) => {
 };
 
 const getDropdownHtml = (list: [string, string][]) => {
+  // Sort alphabetically, moving top-level changelog entry to the top
   const sortedList = list.sort((a, b) => {
-    if (a[0] < b[0]) return -1;
-    if (a[0] > b[0]) return 1;
+    if (a[0] === 'CHANGELOG.md' || a[0] < b[0]) return -1;
+    if (b[0] === 'CHANGELOG.md' || a[0] > b[0]) return 1;
     return 0;
   });
   return `
     <div id="${constants.DOM.CHANGELOG_DROPDOWN_ID}">
       <ul class="dropdown-menu dropdown-menu-sw">
         ${sortedList.map(([name, link]) => {
-          // <li class="d-block d-md-none dropdown-divider" role="none"></li>
           return `
-            <li class="${constants.DOM.CUSTOM_DROPDOWN_ITEM_CLASS}" title="${name}">
+            <li
+              class="${constants.DOM.CUSTOM_DROPDOWN_ITEM_CLASS} ${name === 'CHANGELOG.md' ? '-top' : ''}"
+              title="${name}"
+            >
               <a class="dropdown-item" href="${link}">
                 ${name}
               </a>
             </li>
+            ${name === 'CHANGELOG.md' ? '<li class="d-block d-md-none dropdown-divider" role="none"></li>' : ''}
           `;
         }).join('')}
       </ul>
@@ -83,6 +87,11 @@ const injectCommonCss = () => {
     }
     #${constants.DOM.CHANGELOG_DROPDOWN_ID} .dropdown-menu {
       width: 220px;
+    }
+
+    /* Add bottom border to top-level changelog row */
+    #${constants.DOM.CHANGELOG_DROPDOWN_ID} .dropdown-menu li.-top {
+      border-bottom: 1px solid #eaecef;
     }
   `;
   document.getElementsByTagName('head')[0].appendChild(styleElem);
