@@ -1,7 +1,7 @@
 {
   "name": "GitHub Changelog Viewer",
   "short_name": "GitHub Changelog Viewer",
-  "version": "0.1",
+  "version": "0.0.2",
   "manifest_version": 2,
   "description": "Quickly view changelogs in a Github repo.",
   "homepage_url": "https://github.com/dburdan/github-changelog-viewer",
